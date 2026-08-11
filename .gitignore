@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment & secrets — NEVER COMMIT THESE
+.env
+*.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing & coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Results & raw outputs (large binary/JSONL files)
+results/raw/
+results/charts/
+results/leaderboard.csv
+
+# Local dataset variants that may contain sensitive data
+data/qa_dataset_private.json
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build cache
+.ruff_cache/
