@@ -48,22 +48,22 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/shriram1206/rag-eval-framework"
-Repository = "https://github.com/shriram1206/rag-eval-framework"
-Issues = "https://github.com/shriram1206/rag-eval-framework/issues"
+Homepage = "https://github.com/shriram1206/rag-lens-framework"
+Repository = "https://github.com/shriram1206/rag-lens-framework"
+Issues = "https://github.com/shriram1206/rag-lens-framework/issues"
 
 [project.scripts]
-rag-eval = "rag_eval.cli:app"
+rag-lens = "rag_lens.cli:app"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/rag_eval"]
+packages = ["src/rag_lens"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-v --tb=short"
 
 [tool.coverage.run]
-source = ["src/rag_eval"]
+source = ["src/rag_lens"]
 omit = ["*/tests/*"]
 
 [tool.coverage.report]

@@ -26,8 +26,8 @@ from tenacity import (
     before_sleep_log,
 )
 
-from rag_eval.judge.base import BaseJudge, JudgeCallError, JudgeParseError, JudgeResponse
-from rag_eval.judge.prompts import PROMPT_VERSION, SYSTEM_MESSAGE
+from rag_lens.judge.base import BaseJudge, JudgeCallError, JudgeParseError, JudgeResponse
+from rag_lens.judge.prompts import PROMPT_VERSION, SYSTEM_MESSAGE
 
 load_dotenv()
 

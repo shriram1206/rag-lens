@@ -10,7 +10,7 @@ from __future__ import annotations
 import pytest
 from pydantic import ValidationError
 
-from rag_eval.ingestion.schema import QAItem, RAGOutput, MetricScore, EvalResult
+from rag_lens.ingestion.schema import QAItem, RAGOutput, MetricScore, EvalResult
 
 
 class TestQAItem:

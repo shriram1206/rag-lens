@@ -10,12 +10,12 @@ from __future__ import annotations
 import pytest
 from unittest.mock import MagicMock
 
-from rag_eval.evaluators.faithfulness import Faithfulness
-from rag_eval.evaluators.answer_relevance import AnswerRelevance
-from rag_eval.evaluators.context_precision import ContextPrecision
-from rag_eval.evaluators.context_recall import ContextRecall
-from rag_eval.ingestion.schema import QAItem, RAGOutput, MetricScore
-from rag_eval.judge.base import BaseJudge, JudgeCallError, JudgeParseError, JudgeResponse
+from rag_lens.evaluators.faithfulness import Faithfulness
+from rag_lens.evaluators.answer_relevance import AnswerRelevance
+from rag_lens.evaluators.context_precision import ContextPrecision
+from rag_lens.evaluators.context_recall import ContextRecall
+from rag_lens.ingestion.schema import QAItem, RAGOutput, MetricScore
+from rag_lens.judge.base import BaseJudge, JudgeCallError, JudgeParseError, JudgeResponse
 
 
 # ---------------------------------------------------------------------------
@@ -184,7 +184,7 @@ class TestContextRecall:
 
     def test_composite_score_computed(self) -> None:
         """EvalResult.composite_score should be the mean of all non-None metric scores."""
-        from rag_eval.ingestion.schema import EvalResult, MetricScore
+        from rag_lens.ingestion.schema import EvalResult, MetricScore
         result = EvalResult(
             item_id="comp001",
             question="Q",
@@ -197,7 +197,7 @@ class TestContextRecall:
 
     def test_composite_score_partial(self) -> None:
         """composite_score works even if only some metrics are populated."""
-        from rag_eval.ingestion.schema import EvalResult, MetricScore
+        from rag_lens.ingestion.schema import EvalResult, MetricScore
         result = EvalResult(
             item_id="comp002",
             question="Q",

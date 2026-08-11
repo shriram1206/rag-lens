@@ -25,18 +25,18 @@ from typing import Callable
 
 import numpy as np
 
-from rag_eval.evaluators.answer_relevance import AnswerRelevance
-from rag_eval.evaluators.context_precision import ContextPrecision
-from rag_eval.evaluators.context_recall import ContextRecall
-from rag_eval.evaluators.faithfulness import Faithfulness
-from rag_eval.ingestion.schema import EvalResult, QAItem, RAGOutput, RunSummary
-from rag_eval.judge.base import BaseJudge
-from rag_eval.judge.groq_judge import GroqJudge
-from rag_eval.judge.prompts import PROMPT_VERSION
-from rag_eval.pipeline.config import RunConfig
-from rag_eval.retrieval.chunking import get_chunker
-from rag_eval.retrieval.embeddings import get_embedder
-from rag_eval.retrieval.retrievers import get_retriever
+from rag_lens.evaluators.answer_relevance import AnswerRelevance
+from rag_lens.evaluators.context_precision import ContextPrecision
+from rag_lens.evaluators.context_recall import ContextRecall
+from rag_lens.evaluators.faithfulness import Faithfulness
+from rag_lens.ingestion.schema import EvalResult, QAItem, RAGOutput, RunSummary
+from rag_lens.judge.base import BaseJudge
+from rag_lens.judge.groq_judge import GroqJudge
+from rag_lens.judge.prompts import PROMPT_VERSION
+from rag_lens.pipeline.config import RunConfig
+from rag_lens.retrieval.chunking import get_chunker
+from rag_lens.retrieval.embeddings import get_embedder
+from rag_lens.retrieval.retrievers import get_retriever
 
 logger = logging.getLogger(__name__)
 

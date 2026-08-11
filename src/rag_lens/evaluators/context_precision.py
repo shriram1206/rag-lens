@@ -1,30 +1,35 @@
 """
-Answer Relevance evaluator.
+Context Precision evaluator.
 
-Measures: Does the generated answer actually address the user's question?
-A high-faithfulness but low-relevance answer is one where the model correctly
-cited the context but answered a different question entirely (topic drift).
+Measures: Of the chunks that were retrieved, what fraction were actually
+relevant to the question? Low precision = the retriever is surfacing a lot
+of noise along with the useful information.
+
+Compare to Context Recall (which asks: "did we retrieve the right stuff?").
+Precision asks: "of what we retrieved, was it all useful?"
+High recall + low precision → retriever is conservative, casting a wide net.
+Low recall + high precision → retriever is narrow, missing important chunks.
 """
 
 from __future__ import annotations
 
 import logging
 
-from rag_eval.ingestion.schema import EvalResult, MetricScore, QAItem, RAGOutput
-from rag_eval.judge.base import BaseJudge, JudgeCallError, JudgeParseError
-from rag_eval.judge.prompts import build_answer_relevance_prompt
+from rag_lens.ingestion.schema import EvalResult, MetricScore, QAItem, RAGOutput
+from rag_lens.judge.base import BaseJudge, JudgeCallError, JudgeParseError
+from rag_lens.judge.prompts import build_context_precision_prompt
 
 logger = logging.getLogger(__name__)
 
 
-class AnswerRelevance:
-    """Evaluate whether the generated answer directly addresses the question.
+class ContextPrecision:
+    """Evaluate the signal-to-noise ratio of the retrieved context.
 
     Args:
         judge: Any BaseJudge implementation.
 
     Example:
-        evaluator = AnswerRelevance(judge=GroqJudge())
+        evaluator = ContextPrecision(judge=GroqJudge())
         result = evaluator.evaluate(rag_output=output, qa_item=item)
     """
 
@@ -32,7 +37,7 @@ class AnswerRelevance:
         self._judge = judge
 
     def score(self, rag_output: RAGOutput) -> MetricScore | None:
-        """Score a single RAGOutput for answer relevance.
+        """Score a single RAGOutput for context precision.
 
         Args:
             rag_output: The pipeline output to evaluate.
@@ -40,15 +45,15 @@ class AnswerRelevance:
         Returns:
             MetricScore if successful, None on judge failure.
         """
-        prompt = build_answer_relevance_prompt(
+        prompt = build_context_precision_prompt(
             question=rag_output.question,
-            answer=rag_output.generated_answer,
+            chunks=rag_output.retrieved_context,
         )
         try:
             response = self._judge.judge(user_prompt=prompt)
         except (JudgeCallError, JudgeParseError) as exc:
             logger.warning(
-                "AnswerRelevance judge failed for item_id=%s: %s",
+                "ContextPrecision judge failed for item_id=%s: %s",
                 rag_output.item_id,
                 exc,
             )
@@ -61,19 +66,19 @@ class AnswerRelevance:
         )
 
     def evaluate(self, rag_output: RAGOutput, qa_item: QAItem) -> EvalResult:
-        """Run answer relevance evaluation and return a populated EvalResult.
+        """Run context precision evaluation and return a populated EvalResult.
 
         Args:
             rag_output: The pipeline output to evaluate.
-            qa_item: The ground-truth item.
+            qa_item: The ground-truth item (used for alignment only).
 
         Returns:
-            EvalResult with answer_relevance populated; error field set on failure.
+            EvalResult with context_precision populated.
         """
         metric = self.score(rag_output)
         return EvalResult(
             item_id=rag_output.item_id,
             question=rag_output.question,
-            answer_relevance=metric,
+            context_precision=metric,
             error=None if metric is not None else "Judge call failed — see logs",
         )

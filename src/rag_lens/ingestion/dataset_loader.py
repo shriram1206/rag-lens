@@ -14,7 +14,7 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from rag_eval.ingestion.schema import QAItem, RAGOutput
+from rag_lens.ingestion.schema import QAItem, RAGOutput
 
 logger = logging.getLogger(__name__)
 

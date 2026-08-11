@@ -12,7 +12,7 @@ Prerequisites:
   - data/corpus.json must exist (list of raw document strings)
 
 Results are written to results/raw/<config_id>.jsonl
-After this completes, run: rag-eval report --results results/raw/
+After this completes, run: rag-lens report --results results/raw/
 """
 
 from __future__ import annotations
@@ -33,12 +33,12 @@ from rich.progress import Progress, SpinnerColumn, TextColumn, TimeElapsedColumn
 
 load_dotenv()
 
-from rag_eval.ingestion.dataset_loader import DatasetLoader
-from rag_eval.judge.groq_judge import GroqJudge
-from rag_eval.pipeline.config import RunConfig, benchmark_matrix
-from rag_eval.pipeline.runner import run_pipeline
-from rag_eval.reporting.leaderboard import generate_leaderboard
-from rag_eval.reporting.charts import generate_charts
+from rag_lens.ingestion.dataset_loader import DatasetLoader
+from rag_lens.judge.groq_judge import GroqJudge
+from rag_lens.pipeline.config import RunConfig, benchmark_matrix
+from rag_lens.pipeline.runner import run_pipeline
+from rag_lens.reporting.leaderboard import generate_leaderboard
+from rag_lens.reporting.charts import generate_charts
 
 logging.basicConfig(
     level=logging.INFO,

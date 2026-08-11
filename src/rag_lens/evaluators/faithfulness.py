@@ -12,9 +12,9 @@ from __future__ import annotations
 
 import logging
 
-from rag_eval.ingestion.schema import EvalResult, MetricScore, QAItem, RAGOutput
-from rag_eval.judge.base import BaseJudge, JudgeCallError, JudgeParseError
-from rag_eval.judge.prompts import build_faithfulness_prompt
+from rag_lens.ingestion.schema import EvalResult, MetricScore, QAItem, RAGOutput
+from rag_lens.judge.base import BaseJudge, JudgeCallError, JudgeParseError
+from rag_lens.judge.prompts import build_faithfulness_prompt
 
 logger = logging.getLogger(__name__)
 

@@ -17,8 +17,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from rag_eval.ingestion.schema import EvalResult, RunSummary
-from rag_eval.pipeline.config import RunConfig
+from rag_lens.ingestion.schema import EvalResult, RunSummary
+from rag_lens.pipeline.config import RunConfig
 
 logger = logging.getLogger(__name__)
 

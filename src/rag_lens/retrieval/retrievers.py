@@ -20,7 +20,7 @@ import chromadb
 import numpy as np
 from rank_bm25 import BM25Okapi
 
-from rag_eval.retrieval.embeddings import BaseEmbedder
+from rag_lens.retrieval.embeddings import BaseEmbedder
 
 logger = logging.getLogger(__name__)
 
@@ -75,7 +75,7 @@ class DenseRetriever(BaseRetriever):
     ) -> None:
         self._embedder = embedder
         self._client = chromadb.Client()  # In-memory; no disk persistence
-        self._collection_name = collection_name or f"rag_eval_{uuid.uuid4().hex[:8]}"
+        self._collection_name = collection_name or f"rag_lens_{uuid.uuid4().hex[:8]}"
         self._collection = self._client.create_collection(
             name=self._collection_name,
             metadata={"hnsw:space": "cosine"},

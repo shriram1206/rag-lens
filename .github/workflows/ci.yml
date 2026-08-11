@@ -32,7 +32,7 @@ jobs:
         run: |
           pytest tests/unit tests/integration \
             -v --tb=short \
-            --cov=src/rag_eval \
+            --cov=src/rag_lens \
             --cov-report=term-missing \
             --cov-fail-under=80
         env:
@@ -55,4 +55,4 @@ jobs:
           pip install hatchling
           python -m hatchling build
           pip install dist/*.whl
-          python -c "import rag_eval; print('OK:', rag_eval.__version__)"
+          python -c "import rag_lens; print('OK:', rag_lens.__version__)"

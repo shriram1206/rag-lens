@@ -14,10 +14,10 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from rag_eval.ingestion.schema import QAItem, EvalResult
-from rag_eval.judge.base import BaseJudge, JudgeResponse
-from rag_eval.pipeline.config import RunConfig
-from rag_eval.pipeline.runner import run_pipeline
+from rag_lens.ingestion.schema import QAItem, EvalResult
+from rag_lens.judge.base import BaseJudge, JudgeResponse
+from rag_lens.pipeline.config import RunConfig
+from rag_lens.pipeline.runner import run_pipeline
 
 
 MINI_CORPUS = [

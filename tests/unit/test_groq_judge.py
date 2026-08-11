@@ -9,8 +9,8 @@ from __future__ import annotations
 import pytest
 from unittest.mock import MagicMock, patch
 
-from rag_eval.judge.base import JudgeParseError
-from rag_eval.judge.groq_judge import GroqJudge
+from rag_lens.judge.base import JudgeParseError
+from rag_lens.judge.groq_judge import GroqJudge
 
 
 class TestGroqJudgeParser:
@@ -19,7 +19,7 @@ class TestGroqJudgeParser:
     @pytest.fixture()
     def judge(self, monkeypatch: pytest.MonkeyPatch) -> GroqJudge:
         monkeypatch.setenv("GROQ_API_KEY", "fake_key_for_testing")
-        with patch("rag_eval.judge.groq_judge.Groq"):
+        with patch("rag_lens.judge.groq_judge.Groq"):
             return GroqJudge()
 
     def test_valid_json_parsed_correctly(self, judge: GroqJudge) -> None:
@@ -65,7 +65,7 @@ class TestGroqJudgeParser:
         assert response.score == pytest.approx(1.0)
 
     def test_prompt_version_attached(self, judge: GroqJudge) -> None:
-        from rag_eval.judge.prompts import PROMPT_VERSION
+        from rag_lens.judge.prompts import PROMPT_VERSION
         raw = '{"score": 0.7, "rationale": "Mostly grounded."}'
         response = judge._parse_response(raw)
         assert response.prompt_version == PROMPT_VERSION

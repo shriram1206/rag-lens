@@ -1,10 +1,10 @@
 """
-CLI entrypoint for rag-eval.
+CLI entrypoint for rag-lens.
 
 Commands:
-    rag-eval evaluate   → Score a single RAG output log against the 4 metrics
-    rag-eval benchmark  → Run the full 18-config matrix sweep
-    rag-eval report     → Regenerate leaderboard + charts from existing raw results
+    rag-lens evaluate   → Score a single RAG output log against the 4 metrics
+    rag-lens benchmark  → Run the full 18-config matrix sweep
+    rag-lens report     → Regenerate leaderboard + charts from existing raw results
 
 All commands print a rich-formatted summary to stdout.
 Do NOT expose API keys in any log output.
@@ -24,7 +24,7 @@ from rich.panel import Panel
 from rich import print as rprint
 
 app = typer.Typer(
-    name="rag-eval",
+    name="rag-lens",
     help="Open-source RAG Evaluation Framework — quantitatively score your RAG pipeline.",
     add_completion=False,
     rich_markup_mode="rich",
@@ -68,13 +68,13 @@ def evaluate(
     Loads the ground-truth dataset and the RAG output log, runs all 4 evaluators,
     and prints a per-item and aggregate score table.
     """
-    from rag_eval.ingestion.dataset_loader import DatasetLoader
-    from rag_eval.judge.groq_judge import GroqJudge
-    from rag_eval.evaluators.faithfulness import Faithfulness
-    from rag_eval.evaluators.answer_relevance import AnswerRelevance
-    from rag_eval.evaluators.context_precision import ContextPrecision
-    from rag_eval.evaluators.context_recall import ContextRecall
-    from rag_eval.ingestion.schema import EvalResult
+    from rag_lens.ingestion.dataset_loader import DatasetLoader
+    from rag_lens.judge.groq_judge import GroqJudge
+    from rag_lens.evaluators.faithfulness import Faithfulness
+    from rag_lens.evaluators.answer_relevance import AnswerRelevance
+    from rag_lens.evaluators.context_precision import ContextPrecision
+    from rag_lens.evaluators.context_recall import ContextRecall
+    from rag_lens.ingestion.schema import EvalResult
 
     loader = DatasetLoader()
 
@@ -164,11 +164,11 @@ def benchmark(
     """[bold yellow]Benchmark[/bold yellow] — run the full 18-config matrix sweep.
 
     Executes all configurations declared in the matrix YAML, writing raw results
-    to output_dir. Use [bold]rag-eval report[/bold] to generate the leaderboard after.
+    to output_dir. Use [bold]rag-lens report[/bold] to generate the leaderboard after.
     """
-    from rag_eval.ingestion.dataset_loader import DatasetLoader
-    from rag_eval.pipeline.config import benchmark_matrix
-    from rag_eval.pipeline.runner import run_pipeline
+    from rag_lens.ingestion.dataset_loader import DatasetLoader
+    from rag_lens.pipeline.config import benchmark_matrix
+    from rag_lens.pipeline.runner import run_pipeline
 
     loader = DatasetLoader()
 
@@ -212,7 +212,7 @@ def benchmark(
             console.print(f"  [red]FAILED:[/red] {exc}")
             logger.error("Config %s failed: %s", config.config_id, exc, exc_info=True)
 
-    console.print("\n[green]Benchmark sweep complete.[/green] Run [bold]rag-eval report[/bold] to generate leaderboard.")
+    console.print("\n[green]Benchmark sweep complete.[/green] Run [bold]rag-lens report[/bold] to generate leaderboard.")
 
 
 @app.command()
@@ -238,8 +238,8 @@ def report(
     Does not make any API calls — purely aggregates and visualizes saved data.
     Safe to run multiple times; charts and CSV are overwritten (not appended).
     """
-    from rag_eval.reporting.leaderboard import generate_leaderboard
-    from rag_eval.reporting.charts import generate_charts
+    from rag_lens.reporting.leaderboard import generate_leaderboard
+    from rag_lens.reporting.charts import generate_charts
 
     with console.status("Aggregating results..."):
         try:

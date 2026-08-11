@@ -4,7 +4,7 @@
 
 > *"I don't just build RAG systems — I built the tool that measures whether RAG systems work."*
 
-[![CI](https://github.com/shriram1206/rag-eval-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/shriram1206/rag-eval-framework/actions)
+[![CI](https://github.com/shriram1206/rag-lens-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/shriram1206/rag-lens-framework/actions)
 [![PyPI version](https://badge.fury.io/py/rag-lens.svg)](https://badge.fury.io/py/rag-lens)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -27,9 +27,9 @@ cp .env.example .env  # Add your GROQ_API_KEY
 ```
 
 ```python
-from rag_eval.evaluators import Faithfulness, AnswerRelevance
-from rag_eval.judge import GroqJudge
-from rag_eval.ingestion import QAItem, RAGOutput
+from rag_lens.evaluators import Faithfulness, AnswerRelevance
+from rag_lens.judge import GroqJudge
+from rag_lens.ingestion import QAItem, RAGOutput
 
 judge = GroqJudge()
 
@@ -64,13 +64,13 @@ All scores in **[0.0, 1.0]**. All scored by an LLM judge (Llama-3 via Groq).
 
 ```bash
 # Evaluate a single RAG output log
-rag-eval evaluate --dataset data/qa_dataset.json --outputs my_rag_outputs.jsonl
+rag-lens evaluate --dataset data/qa_dataset.json --outputs my_rag_outputs.jsonl
 
 # Run the full 18-configuration benchmark sweep
-rag-eval benchmark --matrix data/configs/benchmark_matrix.yaml
+rag-lens benchmark --matrix data/configs/benchmark_matrix.yaml
 
 # Regenerate leaderboard + charts from existing results (no API calls)
-rag-eval report --results results/raw/
+rag-lens report --results results/raw/
 ```
 
 ---
@@ -105,7 +105,7 @@ LLM-as-a-judge scores are estimates, not ground truth. Before trusting benchmark
 See `docs/project-structure.md` for a full annotated layout.
 
 ```
-src/rag_eval/
+src/rag_lens/
 ├── judge/        → BaseJudge + GroqJudge (swappable LLM backend)
 ├── evaluators/   → Faithfulness, AnswerRelevance, ContextPrecision, ContextRecall
 ├── ingestion/    → Pydantic schemas + dataset loader
@@ -119,8 +119,8 @@ src/rag_eval/
 ## Installation (from source)
 
 ```bash
-git clone https://github.com/shriram1206/rag-eval-framework.git
-cd rag-eval-framework
+git clone https://github.com/shriram1206/rag-lens-framework.git
+cd rag-lens-framework
 pip install -e ".[dev]"
 cp .env.example .env  # Fill in GROQ_API_KEY
 pytest tests/unit tests/integration  # All tests use mocked judge — free to run
