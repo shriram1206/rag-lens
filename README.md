@@ -1,11 +1,11 @@
-# rageval
+# rag-lens
 
 **An open-source, pip-installable Python library for quantitatively evaluating RAG pipelines using LLM-as-a-Judge.**
 
 > *"I don't just build RAG systems — I built the tool that measures whether RAG systems work."*
 
 [![CI](https://github.com/shriram1206/rag-eval-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/shriram1206/rag-eval-framework/actions)
-[![PyPI version](https://badge.fury.io/py/rageval.svg)](https://badge.fury.io/py/rageval)
+[![PyPI version](https://badge.fury.io/py/rag-lens.svg)](https://badge.fury.io/py/rag-lens)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -22,7 +22,7 @@ RAG systems are easy to prototype and hard to trust. Most teams evaluate them by
 ## Quickstart
 
 ```bash
-pip install rageval
+pip install rag-lens
 cp .env.example .env  # Add your GROQ_API_KEY
 ```
 
