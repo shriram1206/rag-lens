@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "rag-lens"
+name = "ram-rag-lens"
 version = "0.1.0"
 description = "An open-source, pip-installable Python library that quantitatively evaluates RAG pipelines using LLM-as-a-Judge methodology."
 readme = "README.md"

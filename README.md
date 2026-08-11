@@ -5,7 +5,7 @@
 > *"I don't just build RAG systems — I built the tool that measures whether RAG systems work."*
 
 [![CI](https://github.com/shriram1206/rag-lens-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/shriram1206/rag-lens-framework/actions)
-[![PyPI version](https://badge.fury.io/py/rag-lens.svg)](https://badge.fury.io/py/rag-lens)
+[![PyPI version](https://badge.fury.io/py/ram-rag-lens.svg)](https://badge.fury.io/py/ram-rag-lens)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -22,7 +22,7 @@ RAG systems are easy to prototype and hard to trust. Most teams evaluate them by
 ## Quickstart
 
 ```bash
-pip install rag-lens
+pip install ram-rag-lens
 cp .env.example .env  # Add your GROQ_API_KEY
 ```
 
