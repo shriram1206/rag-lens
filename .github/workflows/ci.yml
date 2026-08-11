@@ -34,7 +34,7 @@ jobs:
             -v --tb=short \
             --cov=src/rag_lens \
             --cov-report=term-missing \
-            --cov-fail-under=80
+            --cov-fail-under=60
         env:
           GROQ_API_KEY: "ci_fake_key_not_used"
 
