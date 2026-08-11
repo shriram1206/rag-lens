@@ -12,13 +12,10 @@ import json
 from pathlib import Path
 from unittest.mock import MagicMock
 
-import pytest
-
-from rag_lens.ingestion.schema import QAItem, EvalResult
+from rag_lens.ingestion.schema import EvalResult, QAItem
 from rag_lens.judge.base import BaseJudge, JudgeResponse
 from rag_lens.pipeline.config import RunConfig
 from rag_lens.pipeline.runner import run_pipeline
-
 
 MINI_CORPUS = [
     "Python is a high-level, interpreted programming language created by Guido van Rossum in 1991. "

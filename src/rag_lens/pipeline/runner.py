@@ -18,10 +18,9 @@ from __future__ import annotations
 
 import json
 import logging
-import os
 import time
+from collections.abc import Callable
 from pathlib import Path
-from typing import Callable
 
 import numpy as np
 
@@ -32,7 +31,6 @@ from rag_lens.evaluators.faithfulness import Faithfulness
 from rag_lens.ingestion.schema import EvalResult, QAItem, RAGOutput, RunSummary
 from rag_lens.judge.base import BaseJudge
 from rag_lens.judge.groq_judge import GroqJudge
-from rag_lens.judge.prompts import PROMPT_VERSION
 from rag_lens.pipeline.config import RunConfig
 from rag_lens.retrieval.chunking import get_chunker
 from rag_lens.retrieval.embeddings import get_embedder

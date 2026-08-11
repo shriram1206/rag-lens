@@ -82,14 +82,13 @@ class DatasetLoader:
         suffix = path.suffix.lower()
         if suffix == ".json":
             return self._read_json(path)
-        elif suffix == ".jsonl":
+        if suffix == ".jsonl":
             return self._read_jsonl(path)
-        elif suffix == ".csv":
+        if suffix == ".csv":
             return self._read_csv(path)
-        else:
-            raise ValueError(
-                f"Unsupported file format '{suffix}'. Accepted: .json, .jsonl, .csv"
-            )
+        raise ValueError(
+            f"Unsupported file format '{suffix}'. Accepted: .json, .jsonl, .csv"
+        )
 
     @staticmethod
     def _read_json(path: Path) -> list[dict]:

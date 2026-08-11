@@ -17,13 +17,13 @@ import time
 from typing import Any
 
 from dotenv import load_dotenv
-from groq import Groq, RateLimitError, APIStatusError
+from groq import APIStatusError, Groq, RateLimitError
 from tenacity import (
+    before_sleep_log,
     retry,
     retry_if_exception_type,
     stop_after_attempt,
     wait_exponential,
-    before_sleep_log,
 )
 
 from rag_lens.judge.base import BaseJudge, JudgeCallError, JudgeParseError, JudgeResponse
@@ -61,7 +61,7 @@ class GroqJudge(BaseJudge):
     ) -> None:
         api_key = os.environ.get("GROQ_API_KEY")
         if not api_key:
-            raise EnvironmentError(
+            raise OSError(
                 "GROQ_API_KEY is not set. Copy .env.example → .env and add your key."
             )
         self._client = Groq(api_key=api_key)

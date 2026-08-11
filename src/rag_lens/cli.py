@@ -14,14 +14,12 @@ from __future__ import annotations
 
 import json
 import logging
-import sys
 from pathlib import Path
 
 import typer
 from rich.console import Console
-from rich.table import Table
 from rich.panel import Panel
-from rich import print as rprint
+from rich.table import Table
 
 app = typer.Typer(
     name="rag-lens",
@@ -68,13 +66,13 @@ def evaluate(
     Loads the ground-truth dataset and the RAG output log, runs all 4 evaluators,
     and prints a per-item and aggregate score table.
     """
-    from rag_lens.ingestion.dataset_loader import DatasetLoader
-    from rag_lens.judge.groq_judge import GroqJudge
-    from rag_lens.evaluators.faithfulness import Faithfulness
     from rag_lens.evaluators.answer_relevance import AnswerRelevance
     from rag_lens.evaluators.context_precision import ContextPrecision
     from rag_lens.evaluators.context_recall import ContextRecall
+    from rag_lens.evaluators.faithfulness import Faithfulness
+    from rag_lens.ingestion.dataset_loader import DatasetLoader
     from rag_lens.ingestion.schema import EvalResult
+    from rag_lens.judge.groq_judge import GroqJudge
 
     loader = DatasetLoader()
 
@@ -105,7 +103,7 @@ def evaluate(
 
     try:
         judge = GroqJudge(model=judge_model)
-    except EnvironmentError as exc:
+    except OSError as exc:
         console.print(f"[red]Configuration error:[/red] {exc}")
         raise typer.Exit(1)
 
@@ -238,8 +236,8 @@ def report(
     Does not make any API calls — purely aggregates and visualizes saved data.
     Safe to run multiple times; charts and CSV are overwritten (not appended).
     """
-    from rag_lens.reporting.leaderboard import generate_leaderboard
     from rag_lens.reporting.charts import generate_charts
+    from rag_lens.reporting.leaderboard import generate_leaderboard
 
     with console.status("Aggregating results..."):
         try:

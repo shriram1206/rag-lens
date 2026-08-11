@@ -12,9 +12,9 @@ from __future__ import annotations
 import pytest
 
 from rag_lens.retrieval.chunking import (
-    SentenceChunker,
     ParagraphChunker,
     SemanticChunker,
+    SentenceChunker,
     get_chunker,
 )
 

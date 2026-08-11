@@ -9,10 +9,8 @@ so downstream code can assume data integrity.
 from __future__ import annotations
 
 import hashlib
-from typing import Optional
 
 from pydantic import BaseModel, Field, field_validator, model_validator
-
 
 # ---------------------------------------------------------------------------
 # Ground-truth models (input to the framework)
@@ -42,7 +40,7 @@ class QAItem(BaseModel):
         return v.strip()
 
     @model_validator(mode="after")
-    def _auto_generate_id(self) -> "QAItem":
+    def _auto_generate_id(self) -> QAItem:
         if not self.item_id:
             digest = hashlib.sha256(
                 f"{self.question}{self.ground_truth_answer}".encode()
@@ -117,17 +115,17 @@ class EvalResult(BaseModel):
 
     item_id: str
     question: str
-    faithfulness: Optional[MetricScore] = None
-    answer_relevance: Optional[MetricScore] = None
-    context_precision: Optional[MetricScore] = None
-    context_recall: Optional[MetricScore] = None
-    error: Optional[str] = Field(
+    faithfulness: MetricScore | None = None
+    answer_relevance: MetricScore | None = None
+    context_precision: MetricScore | None = None
+    context_recall: MetricScore | None = None
+    error: str | None = Field(
         default=None,
         description="Populated when evaluation failed; do not silently ignore",
     )
 
     @property
-    def composite_score(self) -> Optional[float]:
+    def composite_score(self) -> float | None:
         """Arithmetic mean of all non-None metric scores."""
         scores = [
             m.score
@@ -157,15 +155,15 @@ class RunSummary(BaseModel):
     n_items: int
     n_errors: int
 
-    faithfulness_mean: Optional[float] = None
-    faithfulness_std: Optional[float] = None
-    answer_relevance_mean: Optional[float] = None
-    answer_relevance_std: Optional[float] = None
-    context_precision_mean: Optional[float] = None
-    context_precision_std: Optional[float] = None
-    context_recall_mean: Optional[float] = None
-    context_recall_std: Optional[float] = None
-    composite_score: Optional[float] = None
+    faithfulness_mean: float | None = None
+    faithfulness_std: float | None = None
+    answer_relevance_mean: float | None = None
+    answer_relevance_std: float | None = None
+    context_precision_mean: float | None = None
+    context_precision_std: float | None = None
+    context_recall_mean: float | None = None
+    context_recall_std: float | None = None
+    composite_score: float | None = None
 
     @property
     def error_rate(self) -> float:

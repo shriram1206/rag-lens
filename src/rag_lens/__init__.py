@@ -19,6 +19,7 @@ __author__ = "Shriram M"
 __email__ = "shriram.coder@gmail.com"
 
 import sys
+
 if "pytest" not in sys.modules:
     print(f":: rageval v{__version__} | Precision RAG Evaluation Engine Initialized.")
 
@@ -30,8 +31,8 @@ from rag_lens.evaluators import (
 )
 from rag_lens.ingestion import DatasetLoader, QAItem, RAGOutput
 from rag_lens.judge import GroqJudge
-from rag_lens.pipeline import RunConfig, run_pipeline, benchmark_matrix
-from rag_lens.reporting import generate_leaderboard, generate_charts
+from rag_lens.pipeline import RunConfig, benchmark_matrix, run_pipeline
+from rag_lens.reporting import generate_charts, generate_leaderboard
 
 __all__ = [
     "Faithfulness",

@@ -68,7 +68,7 @@ class OpenAIEmbedder(BaseEmbedder):
     ) -> None:
         api_key = os.environ.get("OPENAI_API_KEY")
         if not api_key:
-            raise EnvironmentError(
+            raise OSError(
                 "OPENAI_API_KEY is not set. Required for the ada-002 embedding arm."
             )
         from openai import OpenAI  # noqa: PLC0415
@@ -193,12 +193,11 @@ def get_embedder(model_name: str) -> BaseEmbedder:
     """
     if model_name == "ada-002":
         return OpenAIEmbedder()
-    elif model_name == "bge-large":
+    if model_name == "bge-large":
         return BGEEmbedder()
-    elif model_name == "e5-large":
+    if model_name == "e5-large":
         return E5Embedder()
-    else:
-        raise ValueError(
-            f"Unknown embedding model '{model_name}'. "
-            "Valid options: 'ada-002', 'bge-large', 'e5-large'"
-        )
+    raise ValueError(
+        f"Unknown embedding model '{model_name}'. "
+        "Valid options: 'ada-002', 'bge-large', 'e5-large'"
+    )

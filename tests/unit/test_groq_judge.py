@@ -6,8 +6,9 @@ Only parses — never calls the live Groq API. Judge API calls are mocked.
 
 from __future__ import annotations
 
+from unittest.mock import patch
+
 import pytest
-from unittest.mock import MagicMock, patch
 
 from rag_lens.judge.base import JudgeParseError
 from rag_lens.judge.groq_judge import GroqJudge

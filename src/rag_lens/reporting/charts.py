@@ -83,7 +83,7 @@ def _grouped_bar_by_dimension(
     fig.patch.set_facecolor("#0F0F1A")
     ax.set_facecolor("#0F0F1A")
 
-    for i, (metric, label, color) in enumerate(zip(_METRICS, _METRIC_LABELS, _PALETTE)):
+    for i, (metric, label, color) in enumerate(zip(_METRICS, _METRIC_LABELS, _PALETTE, strict=False)):
         vals = grouped[metric].fillna(0).tolist()
         bars = ax.bar(x + offsets[i], vals, width=bar_width, label=label, color=color, alpha=0.9)
         for bar in bars:

@@ -7,16 +7,16 @@ See docs/qa-testing.md §2 for the testing philosophy.
 
 from __future__ import annotations
 
-import pytest
 from unittest.mock import MagicMock
 
-from rag_lens.evaluators.faithfulness import Faithfulness
+import pytest
+
 from rag_lens.evaluators.answer_relevance import AnswerRelevance
 from rag_lens.evaluators.context_precision import ContextPrecision
 from rag_lens.evaluators.context_recall import ContextRecall
-from rag_lens.ingestion.schema import QAItem, RAGOutput, MetricScore
+from rag_lens.evaluators.faithfulness import Faithfulness
+from rag_lens.ingestion.schema import MetricScore, QAItem, RAGOutput
 from rag_lens.judge.base import BaseJudge, JudgeCallError, JudgeParseError, JudgeResponse
-
 
 # ---------------------------------------------------------------------------
 # Fixtures

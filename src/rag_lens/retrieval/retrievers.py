@@ -186,9 +186,8 @@ def get_retriever(method: str, embedder: BaseEmbedder) -> BaseRetriever:
     """
     if method == "dense":
         return DenseRetriever(embedder=embedder)
-    elif method == "hybrid":
+    if method == "hybrid":
         return HybridRetriever(embedder=embedder)
-    else:
-        raise ValueError(
-            f"Unknown retrieval method '{method}'. Valid options: 'dense', 'hybrid'"
-        )
+    raise ValueError(
+        f"Unknown retrieval method '{method}'. Valid options: 'dense', 'hybrid'"
+    )

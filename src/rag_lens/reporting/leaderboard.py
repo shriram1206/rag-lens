@@ -18,7 +18,6 @@ import numpy as np
 import pandas as pd
 
 from rag_lens.ingestion.schema import EvalResult, RunSummary
-from rag_lens.pipeline.config import RunConfig
 
 logger = logging.getLogger(__name__)
 

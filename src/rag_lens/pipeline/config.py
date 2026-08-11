@@ -14,7 +14,6 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Literal
 
-
 ChunkingStrategy = Literal["sentence", "paragraph", "semantic"]
 EmbeddingModel = Literal["ada-002", "bge-large", "e5-large"]
 RetrievalMethod = Literal["dense", "hybrid"]
@@ -84,14 +83,14 @@ def benchmark_matrix() -> list[RunConfig]:
         otherwise gracefully falls back to 12 configs (local embedders only).
     """
     import os
-    
+
     configs = []
-    
+
     # Check if OpenAI key is available
     available_embedders = ["bge-large"]
     if os.environ.get("OPENAI_API_KEY"):
         available_embedders.insert(0, "ada-002")
-        
+
     for chunking in ("sentence", "paragraph", "semantic"):
         for embedding in available_embedders:
             for retrieval in ("dense", "hybrid"):

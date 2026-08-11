@@ -12,8 +12,8 @@ All strategies produce non-overlapping, non-empty chunks.
 
 from __future__ import annotations
 
-import re
 import logging
+import re
 from abc import ABC, abstractmethod
 
 import numpy as np
@@ -191,12 +191,11 @@ def get_chunker(strategy: str) -> BaseChunker:
     """
     if strategy == "sentence":
         return SentenceChunker()
-    elif strategy == "paragraph":
+    if strategy == "paragraph":
         return ParagraphChunker()
-    elif strategy == "semantic":
+    if strategy == "semantic":
         return SemanticChunker()
-    else:
-        raise ValueError(
-            f"Unknown chunking strategy '{strategy}'. "
-            "Valid options: 'sentence', 'paragraph', 'semantic'"
-        )
+    raise ValueError(
+        f"Unknown chunking strategy '{strategy}'. "
+        "Valid options: 'sentence', 'paragraph', 'semantic'"
+    )
